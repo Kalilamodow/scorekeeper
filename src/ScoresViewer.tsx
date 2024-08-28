@@ -16,6 +16,7 @@ type ScoresViewerProps = {
   back: () => void;
   save: (game: GameData) => void;
   rename: (newName: string) => void;
+  delete: () => void;
 };
 
 const listStyles = StyleSheet.create({
@@ -69,7 +70,9 @@ const InputDialog = (props: InputDialogProps) => {
 };
 
 export default (props: ScoresViewerProps) => {
-  const [game, setGame] = useState(JSON.stringify(props.game));
+  const [game, setGame] = useState(
+    JSON.stringify(props.game || { name: "", scores: [] })
+  );
 
   const [amountEnterDialogType, setAmountEnterDialogType] = useState<
     "+" | "-" | ""
@@ -201,10 +204,30 @@ export default (props: ScoresViewerProps) => {
 
       <Appbar.Header elevated>
         <Appbar.BackAction onPress={props.back} />
-        <Appbar.Content title={props.game.name} />
+        <Appbar.Content title={JSON.parse(game).name} />
         <Appbar.Action
           icon='rename-box'
           onPress={() => setRenameGameDialogOpen(true)}
+        />
+        <Appbar.Action
+          icon='trash-can'
+          onPress={() =>
+            Alert.alert(
+              "Confirmation",
+              "Are you sure you want to remove this game?",
+              [
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                },
+                {
+                  text: "Remove",
+                  style: "destructive",
+                  onPress: () => props.delete(),
+                },
+              ]
+            )
+          }
         />
       </Appbar.Header>
 

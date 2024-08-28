@@ -125,6 +125,10 @@ export default () => {
 
               setOpenGame(name);
             }}
+            delete={() => {
+              setGames(games.filter((x) => x.name != openGame));
+              setOpenGame("");
+            }}
           />
         ) : (
           <ScoresViewer
@@ -132,6 +136,7 @@ export default () => {
             back={() => {}}
             save={() => {}}
             rename={() => {}}
+            delete={() => {}}
           />
         )}
       </SlidingView>

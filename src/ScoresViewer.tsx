@@ -42,6 +42,7 @@ type InputDialogProps = {
   visible: boolean;
   title: string;
   textLabel: string;
+  kbType?: "default" | "numeric";
   close: () => void;
   confirm: (value: string) => void;
   verify: (value: string) => boolean;
@@ -58,6 +59,7 @@ const InputDialog = (props: InputDialogProps) => {
           label={props.textLabel}
           onChangeText={(v) => setInput(v)}
           defaultValue=''
+          keyboardType={props.kbType}
           error={!props.verify(input)}
         />
       </Dialog.Content>
@@ -149,6 +151,7 @@ export default (props: ScoresViewerProps) => {
           verify={(v) =>
             !Number.isNaN(parseInt(amountEnterDialogType + v, 10))
           }
+          kbType="numeric"
           confirm={amountEnterDialogSubmitted}
         />
 

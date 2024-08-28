@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Dimensions } from "react-native";
-import { Text } from "react-native-paper";
 
 import Home from "./Home";
 import ScoresViewer from "./ScoresViewer";
@@ -44,8 +43,6 @@ const SlideIntoView = (props: { children: React.ReactNode }) => {
 export default () => {
   const [openGame, setOpenGame] = useState("");
   const [games, setGames] = useState<GameData[]>([]);
-
-  const scoreViewAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     AsyncStorage.getItem("savedata").then((data) => {

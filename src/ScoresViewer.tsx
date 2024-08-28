@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import {
   Appbar,
   Button,
   Dialog,
+  Divider,
+  Menu,
   Portal,
   Text,
   TextInput,
-  Divider,
-  Menu,
 } from "react-native-paper";
-import { Alert } from "react-native";
 
 type ScoresViewerProps = {
   game: GameData;

@@ -170,9 +170,11 @@ export default (props: ScoresViewerProps) => {
           title='Rename Game'
           textLabel='New Name'
           verify={(v) => v.length >= 3 && v.length <= 10}
-          confirm={(v) => (
-            props.rename(v), setRenameGameDialogOpen(false)
-          )}
+          confirm={(v) =>
+            v.length >= 3 &&
+            v.length <= 10 &&
+            (props.rename(v), setRenameGameDialogOpen(false))
+          }
         />
       </Portal>
 

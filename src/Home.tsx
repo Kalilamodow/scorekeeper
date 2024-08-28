@@ -51,7 +51,18 @@ export default function Home(props: HomeProps) {
   const [optionsDialogOpen, setOptionsDialogOpen] = useState(false);
 
   const createGame = () => {
-    props.createGame(createGameDialogInput);
+    if (
+      createGameDialogInput.length < 3 ||
+      createGameDialogInput.length > 10
+    )
+      return;
+
+    if (
+      props.games.map((x) => x.name).includes(createGameDialogInput.trim())
+    )
+      return;
+
+    props.createGame(createGameDialogInput.trim());
     setCreateGameDialogOpen(false);
   };
 

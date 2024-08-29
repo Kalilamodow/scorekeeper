@@ -102,17 +102,21 @@ export default () => {
     });
   };
 
+  const createGame = (n: string) => {
+    setGames([
+      ...structuredClone(games),
+      { name: n, scores: [], createdAt: Date.now() },
+    ]);
+
+    setOpenGame(n);
+  }
+
   return (
     <>
       <Home
         games={games}
         openGame={(g) => setOpenGame(g)}
-        createGame={(n) =>
-          setGames([
-            ...structuredClone(games),
-            { name: n, scores: [], createdAt: Date.now() },
-          ])
-        }
+        createGame={createGame}
         clearSaveData={clearSaveData}
       />
       <SlidingView show={openGame.length > 0}>

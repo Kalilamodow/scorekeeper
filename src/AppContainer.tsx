@@ -76,7 +76,9 @@ export default () => {
   useEffect(() => {
     AsyncStorage.getItem("savedata").then((data) => {
       if (data == null) return;
-      setGames(JSON.parse(data));
+      let gamelist = JSON.parse(data) as GameData[];
+      gamelist = gamelist.sort((a, b) => b.createdAt - a.createdAt);
+      setGames(gamelist);
     });
   }, []);
 
@@ -106,7 +108,10 @@ export default () => {
         games={games}
         openGame={(g) => setOpenGame(g)}
         createGame={(n) =>
-          setGames([...structuredClone(games), { name: n, scores: [] }])
+          setGames([
+            ...structuredClone(games),
+            { name: n, scores: [], createdAt: Date.now() },
+          ])
         }
         clearSaveData={clearSaveData}
       />

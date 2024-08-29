@@ -14,19 +14,32 @@ type GameCardProps = {
   open: () => void;
 };
 
-const GameCard = (props: GameCardProps) => (
+function formatDate(timestamp: number) {
+  const date = new Date(timestamp);
+  const now = new Date();
+
+  // today
+  if (date.toDateString() == now.toDateString()) {
+    return date.toLocaleTimeString();
+  }
+
+  // still this year
+  if (date.getFullYear() == now.getFullYear()) {
+    return date.toLocaleDateString().slice(4, -5); // strip year + day name
+  }
+
+  return date.toLocaleDateString();
+}
+
+const GameCard = ({ game, open: openGame }: GameCardProps) => (
   <Card style={{ width: "90%", marginHorizontal: "auto", marginTop: 10 }}>
     <Card.Title
-      title={props.game.name}
+      title={game.name}
       titleStyle={{ fontWeight: "bold" }}
-      subtitle={
-        props.game.scores.length > 0
-          ? props.game.scores.map((x) => x.name).join(", ")
-          : "No people"
-      }
+      subtitle={"Created " + formatDate(game.createdAt)}
       right={() => (
         <Button
-          onPress={props.open}
+          onPress={openGame}
           mode='outlined'
           style={{ marginRight: 16 }}
         >

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Dimensions } from "react-native";
 
 import Home from "./Home";
-import ScoresViewer from "./ScoresViewer";
+import ScoresViewer from "./Viewer";
 
 function structuredClone<T>(obj: T) {
   return JSON.parse(JSON.stringify(obj)) as T;

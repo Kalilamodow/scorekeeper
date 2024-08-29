@@ -1,6 +1,6 @@
 import { AppRegistry } from "react-native";
 import { PaperProvider, MD3LightTheme } from "react-native-paper";
-import AppContainer from "./src/AppContainer";
+import Scorekeeper from "./src/Scorekeeper";
 import { StatusBar } from "expo-status-bar";;
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <PaperProvider theme={MD3LightTheme}>
-        <AppContainer />
+        <Scorekeeper />
       </PaperProvider>
     </>
   );
